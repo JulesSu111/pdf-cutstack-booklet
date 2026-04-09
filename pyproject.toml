@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pdf-booklet-app"
+version = "0.1.0"
+description = "A reusable PDF booklet imposition tool for A4 2x2 printing workflows"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "PyMuPDF>=1.24",
+]
+authors = [
+  {name = "OpenAI assistant scaffold for user project"}
+]
+
+[project.scripts]
+pdf-booklet = "pdf_booklet_app.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,2 @@
+[console_scripts]
+pdf-booklet = pdf_booklet_app.cli:main
