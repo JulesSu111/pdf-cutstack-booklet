@@ -43,10 +43,10 @@ class Ui_MainWindow(object):
         self.verticalLayoutLeft.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.label = QLabel(self.verticalLayoutWidget)
-        self.label.setObjectName(u"label")
+        self.labelInput = QLabel(self.verticalLayoutWidget)
+        self.labelInput.setObjectName(u"labelInput")
 
-        self.horizontalLayout.addWidget(self.label)
+        self.horizontalLayout.addWidget(self.labelInput)
 
         self.lineEditInput = QLineEdit(self.verticalLayoutWidget)
         self.lineEditInput.setObjectName(u"lineEditInput")
@@ -63,10 +63,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.label_2 = QLabel(self.verticalLayoutWidget)
-        self.label_2.setObjectName(u"label_2")
+        self.labelOutput = QLabel(self.verticalLayoutWidget)
+        self.labelOutput.setObjectName(u"labelOutput")
 
-        self.horizontalLayout_2.addWidget(self.label_2)
+        self.horizontalLayout_2.addWidget(self.labelOutput)
 
         self.lineEditOutput = QLineEdit(self.verticalLayoutWidget)
         self.lineEditOutput.setObjectName(u"lineEditOutput")
@@ -83,10 +83,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_5 = QHBoxLayout()
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
-        self.label_4 = QLabel(self.verticalLayoutWidget)
-        self.label_4.setObjectName(u"label_4")
+        self.labelPreset = QLabel(self.verticalLayoutWidget)
+        self.labelPreset.setObjectName(u"labelPreset")
 
-        self.horizontalLayout_5.addWidget(self.label_4)
+        self.horizontalLayout_5.addWidget(self.labelPreset)
 
         self.comboPreset = QComboBox(self.verticalLayoutWidget)
         self.comboPreset.setObjectName(u"comboPreset")
@@ -98,13 +98,16 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_4 = QHBoxLayout()
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.label_3 = QLabel(self.verticalLayoutWidget)
-        self.label_3.setObjectName(u"label_3")
+        self.labelLayout = QLabel(self.verticalLayoutWidget)
+        self.labelLayout.setObjectName(u"labelLayout")
 
-        self.horizontalLayout_4.addWidget(self.label_3)
+        self.horizontalLayout_4.addWidget(self.labelLayout)
 
         self.spinMargin = QDoubleSpinBox(self.verticalLayoutWidget)
         self.spinMargin.setObjectName(u"spinMargin")
+        self.spinMargin.setDecimals(1)
+        self.spinMargin.setMaximum(50.000000000000000)
+        self.spinMargin.setSingleStep(0.500000000000000)
 
         self.horizontalLayout_4.addWidget(self.spinMargin)
 
@@ -113,10 +116,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_6 = QHBoxLayout()
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.label_5 = QLabel(self.verticalLayoutWidget)
-        self.label_5.setObjectName(u"label_5")
+        self.labelRotate = QLabel(self.verticalLayoutWidget)
+        self.labelRotate.setObjectName(u"labelRotate")
 
-        self.horizontalLayout_6.addWidget(self.label_5)
+        self.horizontalLayout_6.addWidget(self.labelRotate)
 
         self.comboRotate = QComboBox(self.verticalLayoutWidget)
         self.comboRotate.setObjectName(u"comboRotate")
@@ -146,6 +149,7 @@ class Ui_MainWindow(object):
 
         self.plainTextLog = QPlainTextEdit(self.horizontalLayoutWidget_3)
         self.plainTextLog.setObjectName(u"plainTextLog")
+        self.plainTextLog.setReadOnly(True)
 
         self.horizontalLayout_3.addWidget(self.plainTextLog)
 
@@ -167,15 +171,15 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"Input File", None))
-        self.buttonBrowseInput.setText(QCoreApplication.translate("MainWindow", u"input", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"Output File", None))
-        self.buttonBrowseOutput.setText(QCoreApplication.translate("MainWindow", u"output", None))
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Input PDF Layout", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"Page Padding", None))
-        self.label_5.setText(QCoreApplication.translate("MainWindow", u"Output Page Rotation", None))
-        self.checkBackRotate180.setText(QCoreApplication.translate("MainWindow", u"back rotate 180", None))
-        self.checkDrawGuides.setText(QCoreApplication.translate("MainWindow", u"draw guides", None))
+        self.labelInput.setText(QCoreApplication.translate("MainWindow", u"Input File", None))
+        self.buttonBrowseInput.setText(QCoreApplication.translate("MainWindow", u"Browse...", None))
+        self.labelOutput.setText(QCoreApplication.translate("MainWindow", u"Output File", None))
+        self.buttonBrowseOutput.setText(QCoreApplication.translate("MainWindow", u"Browse...", None))
+        self.labelPreset.setText(QCoreApplication.translate("MainWindow", u"Input PDF Layout", None))
+        self.labelLayout.setText(QCoreApplication.translate("MainWindow", u"Page Padding", None))
+        self.labelRotate.setText(QCoreApplication.translate("MainWindow", u"Output Page Rotation", None))
+        self.checkBackRotate180.setText(QCoreApplication.translate("MainWindow", u"Rotate back side by 180\u00b0", None))
+        self.checkDrawGuides.setText(QCoreApplication.translate("MainWindow", u"Draw cut/fold guides", None))
         self.buttonGenerate.setText(QCoreApplication.translate("MainWindow", u"Generate", None))
     # retranslateUi
 
