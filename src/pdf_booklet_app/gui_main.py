@@ -66,7 +66,7 @@ class MainWindow(QMainWindow):
                     "missing_output_title": "Missing Output",
                     "missing_output_text": "Please select an output PDF.",
                     "success_title": "Success",
-                    "success_text": "PDF generated:\n{output_pdf}",
+                    "success_text": "PDF generated:\n{output_pdf}\n\n{print_tip}",
                     "error_title": "Error",
                 },
                 "logs": {
@@ -77,7 +77,15 @@ class MainWindow(QMainWindow):
                     "rotation": "Rotation: {rotation_label}",
                     "order_mode": "Order mode: {order_mode}",
                     "done": "Done.",
+                    "print_tip": "Printing tip: {print_tip}",
                     "error": "Error: {error}",
+                },
+                "tooltips": {
+                    "experimental": "Experimental feature, not recommended to change.",
+                },
+                "print_tips": {
+                    "vertical": "Please print in duplex mode with long-edge flipping.",
+                    "horizontal": "Please print in duplex mode with short-edge flipping.",
                 },
                 "preset_items": [
                     ("Vertical PDF", PresetMode.VERTICAL.value),
@@ -114,7 +122,7 @@ class MainWindow(QMainWindow):
                     "missing_output_title": "缺少输出文件",
                     "missing_output_text": "请选择输出 PDF。",
                     "success_title": "成功",
-                    "success_text": "PDF 已生成：\n{output_pdf}",
+                    "success_text": "PDF 已生成：\n{output_pdf}\n\n{print_tip}",
                     "error_title": "错误",
                 },
                 "logs": {
@@ -125,7 +133,15 @@ class MainWindow(QMainWindow):
                     "rotation": "旋转：{rotation_label}",
                     "order_mode": "排序模式：{order_mode}",
                     "done": "完成。",
+                    "print_tip": "打印提示：{print_tip}",
                     "error": "错误：{error}",
+                },
+                "tooltips": {
+                    "experimental": "实验功能，不建议修改。",
+                },
+                "print_tips": {
+                    "vertical": "请使用双页打印长边反转进行打印。",
+                    "horizontal": "请使用双页打印短边反转进行打印。",
                 },
                 "preset_items": [
                     ("竖版 PDF", PresetMode.VERTICAL.value),
@@ -162,7 +178,7 @@ class MainWindow(QMainWindow):
                     "missing_output_title": "Ausgabe fehlt",
                     "missing_output_text": "Bitte wählen Sie eine Ausgabe-PDF aus.",
                     "success_title": "Erfolg",
-                    "success_text": "PDF erzeugt:\n{output_pdf}",
+                    "success_text": "PDF erzeugt:\n{output_pdf}\n\n{print_tip}",
                     "error_title": "Fehler",
                 },
                 "logs": {
@@ -173,7 +189,15 @@ class MainWindow(QMainWindow):
                     "rotation": "Drehung: {rotation_label}",
                     "order_mode": "Reihenfolge: {order_mode}",
                     "done": "Fertig.",
+                    "print_tip": "Druckhinweis: {print_tip}",
                     "error": "Fehler: {error}",
+                },
+                "tooltips": {
+                    "experimental": "Experimentelle Funktion, Änderung wird nicht empfohlen.",
+                },
+                "print_tips": {
+                    "vertical": "Bitte duplex mit Bindung an der langen Kante drucken.",
+                    "horizontal": "Bitte duplex mit Bindung an der kurzen Kante drucken.",
                 },
                 "preset_items": [
                     ("Hochformat-PDF", PresetMode.VERTICAL.value),
@@ -212,6 +236,7 @@ class MainWindow(QMainWindow):
         self._language = language_code
         self._apply_static_texts()
         self._reload_dynamic_texts()
+        self._apply_tooltips()
 
     def _apply_static_texts(self) -> None:
         text = self._lang()
@@ -255,19 +280,27 @@ class MainWindow(QMainWindow):
         self.ui.spinMargin.setDecimals(1)
         self.ui.spinMargin.setRange(0.0, 50.0)
         self.ui.spinMargin.setSingleStep(0.5)
-        self.ui.spinMargin.setValue(0.0)
+        self.ui.spinMargin.setValue(1.0)
 
         self.ui.plainTextLog.setReadOnly(True)
         self.ui.checkDrawGuides.setChecked(True)
         self.ui.checkBackRotate180.setChecked(False)
 
         self._apply_preset_defaults()
+        self._apply_tooltips()
 
     def _connect_signals(self) -> None:
         self.ui.buttonBrowseInput.clicked.connect(self._browse_input)
         self.ui.buttonBrowseOutput.clicked.connect(self._browse_output)
         self.ui.buttonGenerate.clicked.connect(self._generate_pdf)
         self.ui.comboPreset.currentIndexChanged.connect(self._apply_preset_defaults)
+
+    def _apply_tooltips(self) -> None:
+        experimental_tip = self._lang()["tooltips"]["experimental"]
+        self.ui.comboRotate.setToolTip(experimental_tip)
+        self.ui.comboRotate.setStatusTip(experimental_tip)
+        self.ui.checkBackRotate180.setToolTip(experimental_tip)
+        self.ui.checkBackRotate180.setStatusTip(experimental_tip)
 
     def _set_combo_by_data(self, combo_box, value: Any) -> None:
         for i in range(combo_box.count()):
@@ -289,8 +322,7 @@ class MainWindow(QMainWindow):
 
             input_path = Path(file_path)
             default_output = input_path.with_name(f"{input_path.stem}_booklet.pdf")
-            if not self.ui.lineEditOutput.text().strip():
-                self.ui.lineEditOutput.setText(str(default_output))
+            self.ui.lineEditOutput.setText(str(default_output))
 
     def _browse_output(self) -> None:
         dialogs = self._lang()["dialogs"]
@@ -318,18 +350,25 @@ class MainWindow(QMainWindow):
     def _current_rotation_label(self) -> str:
         return self.ui.comboRotate.currentText()
 
+    def _current_print_tip(self) -> str:
+        preset = self._current_preset()
+        print_tips = self._lang()["print_tips"]
+
+        if preset == PresetMode.VERTICAL:
+            return print_tips["vertical"]
+        return print_tips["horizontal"]
+
     def _apply_preset_defaults(self) -> None:
         preset = self._current_preset()
 
-        # Padding default is always 0.0 mm now.
-        self.ui.spinMargin.setValue(0.0)
+        self.ui.spinMargin.setValue(1.0)
 
         if preset == PresetMode.VERTICAL:
             self._set_rotate_value(0)
             self.ui.checkBackRotate180.setChecked(False)
 
         elif preset == PresetMode.HORIZONTAL:
-            self._set_rotate_value(90)
+            self._set_rotate_value(0)
             self.ui.checkBackRotate180.setChecked(False)
 
     def _log(self, text: str) -> None:
@@ -371,6 +410,8 @@ class MainWindow(QMainWindow):
                 draw_guides=self.ui.checkDrawGuides.isChecked(),
             )
 
+            print_tip = self._current_print_tip()
+
             self._log(logs["start"])
             self._log(logs["input"].format(input_pdf=input_pdf))
             self._log(logs["output"].format(output_pdf=output_pdf))
@@ -381,10 +422,11 @@ class MainWindow(QMainWindow):
             impose_pdf(config)
 
             self._log(logs["done"])
+            self._log(logs["print_tip"].format(print_tip=print_tip))
             QMessageBox.information(
                 self,
                 dialogs["success_title"],
-                dialogs["success_text"].format(output_pdf=output_pdf),
+                dialogs["success_text"].format(output_pdf=output_pdf, print_tip=print_tip),
             )
 
         except Exception as exc:

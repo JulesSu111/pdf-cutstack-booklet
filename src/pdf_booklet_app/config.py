@@ -23,7 +23,7 @@ class ImpositionConfig:
     output_pdf: Path
     preset: PresetMode = PresetMode.VERTICAL
     order_mode: OrderMode = OrderMode.STACK_AFTER_CUT
-    margin_mm: float = 0.0
+    margin_mm: float = 1.0
     gap_mm: float = 0.0
     rotate_each: int = 0
     back_rotate_180: bool = False
@@ -63,14 +63,14 @@ def get_preset_defaults(preset: PresetMode) -> dict[str, float | int | bool]:
     """Preset defaults."""
     if preset == PresetMode.VERTICAL:
         return {
-            "margin_mm": 0.0,
+            "margin_mm": 1.0,
             "rotate_each": 0,
             "back_rotate_180": False,
         }
     if preset == PresetMode.HORIZONTAL:
         return {
             "margin_mm": 1.0,
-            "rotate_each": 90,
+            "rotate_each": 0,
             "back_rotate_180": False,
         }
     raise ValueError(f"Unsupported preset: {preset}")
