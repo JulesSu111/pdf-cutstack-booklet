@@ -1,5 +1,4 @@
 from __future__ import annotations
-
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
@@ -7,14 +6,12 @@ from pathlib import Path
 
 class PresetMode(str, Enum):
     """High-level preset selected by the user."""
-
     VERTICAL = "vertical"
     HORIZONTAL = "horizontal"
 
 
 class OrderMode(str, Enum):
     """Page-ordering behavior."""
-
     CLASSIC = "classic"
     STACK_AFTER_CUT = "stack-after-cut"
 
@@ -24,7 +21,7 @@ class ImpositionConfig:
     input_pdf: Path
     output_pdf: Path
     preset: PresetMode = PresetMode.VERTICAL
-    order_mode: OrderMode = OrderMode.CLASSIC
+    order_mode: OrderMode = OrderMode.STACK_AFTER_CUT
     margin_mm: float = 4.0
     gap_mm: float = 0.0
     rotate_each: int = 0
@@ -38,7 +35,7 @@ class ImpositionConfig:
         input_pdf: str | Path,
         output_pdf: str | Path,
         preset: PresetMode,
-        order_mode: OrderMode = OrderMode.CLASSIC,
+        order_mode: OrderMode = OrderMode.STACK_AFTER_CUT,
         margin_mm: float | None = None,
         gap_mm: float = 0.0,
         rotate_each: int | None = None,
@@ -55,9 +52,7 @@ class ImpositionConfig:
             gap_mm=gap_mm,
             rotate_each=preset_defaults["rotate_each"] if rotate_each is None else rotate_each,
             back_rotate_180=(
-                preset_defaults["back_rotate_180"]
-                if back_rotate_180 is None
-                else back_rotate_180
+                preset_defaults["back_rotate_180"] if back_rotate_180 is None else back_rotate_180
             ),
             draw_guides=draw_guides,
         )

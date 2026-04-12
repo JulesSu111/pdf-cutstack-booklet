@@ -28,7 +28,6 @@ class MainWindow(QMainWindow):
 
     def _init_form(self) -> None:
         self.ui.comboPreset.addItems(["vertical", "horizontal"])
-        self.ui.comboOrderMode.addItems(["classic", "stack-after-cut"])
         self.ui.comboRotate.addItems(["0", "90", "180", "270"])
 
         self.ui.spinMargin.setDecimals(1)
@@ -106,7 +105,7 @@ class MainWindow(QMainWindow):
                 input_pdf=input_pdf,
                 output_pdf=output_pdf,
                 preset=PresetMode(self.ui.comboPreset.currentText()),
-                order_mode=OrderMode(self.ui.comboOrderMode.currentText()),
+                order_mode=OrderMode.STACK_AFTER_CUT,
                 margin_mm=float(self.ui.spinMargin.value()),
                 gap_mm=0.0,
                 rotate_each=int(self.ui.comboRotate.currentText()),
