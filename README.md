@@ -1,4 +1,8 @@
 # PDF Booklet App
+用于将A4 PDF 快速缩印为小册子
+For quickly turning A4 PDFs into booklets
+Zum schnellen Umwandeln von A4-PDFs in Broschüren
+
 # A4 PDF Cut-Stack Booklet
 
 Language: [ZHN](#zhn) / [ENG](#eng) / [DEU](#deu)
