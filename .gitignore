@@ -5,3 +5,20 @@ build/
 dist/
 .venv/
 venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# local test/output files
+*.pdf
+/output/
+/temp/
+/tmp/
+
+/archive/

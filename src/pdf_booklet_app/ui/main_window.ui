@@ -14,83 +14,133 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="widget" native="true">
+   <widget class="QWidget" name="horizontalLayoutWidget_3">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>681</width>
-      <height>511</height>
+      <x>40</x>
+      <y>40</y>
+      <width>721</width>
+      <height>461</height>
      </rect>
     </property>
-    <widget class="QWidget" name="verticalLayoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>20</y>
-       <width>271</width>
-       <height>491</height>
-      </rect>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QLineEdit" name="lineEditInput"/>
-      </item>
-      <item>
-       <widget class="QPushButton" name="buttonBrowseInput">
-        <property name="text">
-         <string>input</string>
+    <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="3,2">
+     <item>
+      <widget class="QWidget" name="leftPanel" native="true">
+       <widget class="QWidget" name="verticalLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>20</y>
+          <width>361</width>
+          <height>378</height>
+         </rect>
         </property>
+        <layout class="QVBoxLayout" name="verticalLayoutLeft">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Input File</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEditInput"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="buttonBrowseInput">
+             <property name="text">
+              <string>input</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>Output File</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEditOutput"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="buttonBrowseOutput">
+             <property name="text">
+              <string>output</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>Input PDF Layout</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="comboPreset"/>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>Page Padding</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QDoubleSpinBox" name="spinMargin"/>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboOrderMode"/>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboRotate"/>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="checkBackRotate180">
+           <property name="text">
+            <string>back rotate 180</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="checkDrawGuides">
+           <property name="text">
+            <string>draw guides</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="buttonGenerate">
+           <property name="text">
+            <string>Generate</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineEditOutput"/>
-      </item>
-      <item>
-       <widget class="QPushButton" name="buttonBrowseOutput">
-        <property name="text">
-         <string>output</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="comboPreset"/>
-      </item>
-      <item>
-       <widget class="QComboBox" name="comboOrderMode"/>
-      </item>
-      <item>
-       <widget class="QDoubleSpinBox" name="spinMargin"/>
-      </item>
-      <item>
-       <widget class="QComboBox" name="comboRotate"/>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="checkBackRotate180">
-        <property name="text">
-         <string>back rotate 180</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="checkDrawGuides">
-        <property name="text">
-         <string>draw guides</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="buttonGenerate">
-        <property name="text">
-         <string>generate</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPlainTextEdit" name="plainTextLog"/>
-      </item>
-     </layout>
-    </widget>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPlainTextEdit" name="plainTextLog"/>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -99,7 +149,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>33</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>
