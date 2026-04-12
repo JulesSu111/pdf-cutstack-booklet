@@ -1,7 +1,7 @@
 # PDF Booklet App
-用于将A4 PDF 快速缩印为小册子
-For quickly turning A4 PDFs into booklets
-Zum schnellen Umwandeln von A4-PDFs in Broschüren
+- 用于将A4 PDF 快速缩印为4开大小的小册子
+- Quickly convert A4 PDFs into compact quarter-size booklets.
+- A4-PDFs in Sekundenschnelle zu kompakten Viertelheften umwandeln.
 
 # A4 PDF Cut-Stack Booklet
 
