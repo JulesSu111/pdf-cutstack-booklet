@@ -14,6 +14,9 @@ Language: [ZHN](#zhn) / [ENG](#eng) / [DEU](#deu)
 <a id="zhn"></a>
 # 中文
 用于将A4 PDF 快速缩印为小册子
+你好，我想要**star**，谢谢你！
+欢迎 **issue**。  
+欢迎 **意见与建议**
 
 #特性：
 - 适用于任意 A4 大小 PDF
@@ -46,9 +49,6 @@ Language: [ZHN](#zhn) / [ENG](#eng) / [DEU](#deu)
 - 输出前预览排版顺序
 - 添加页码
 
-欢迎 **star**  
-欢迎 **issue**。  
-欢迎 **意见与建议**
 ------------------------------------------------
 <a id="eng"></a>
 # English
@@ -128,7 +128,7 @@ Feature-Wunsch? Einfach Bescheid geben.
 
 
 
-## Dependencies / 依赖库 / Abhängigkeiten
+# Dependencies / 依赖库 / Abhängigkeiten
 - Python 3.x
 - PySide6
 - pypdf
