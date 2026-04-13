@@ -2,6 +2,9 @@
 - 用于将A4 PDF 快速缩印为4开大小的小册子
 - Quickly convert A4 PDFs into compact quarter-size booklets.
 - A4-PDFs in Sekundenschnelle zu kompakten Viertelheften umwandeln.
+Like it? Give it a **star**.  
+Bug? Open an **issue**.  
+Got a feature wish? Tell me.
 
 # A4 PDF Cut-Stack Booklet
 
@@ -42,6 +45,9 @@ Language: [ZHN](#zhn) / [ENG](#eng) / [DEU](#deu)
 - 输出前预览排版顺序
 - 添加页码
 
+欢迎 **star**  
+欢迎 **issue**。  
+欢迎 **意见与建议**
 ------------------------------------------------
 <a id="eng"></a>
 # English
@@ -114,3 +120,14 @@ Danach wie folgt weiterverarbeiten:
 - Anpassbare Hilfslinien
 - Vorschau der Seitenanordnung vor dem Export
 - Seitenzahlen hinzufügen
+
+Gefällt es dir? Gib einen **Star**.  
+Bug gefunden? Bitte ein **Issue** erstellen.  
+Feature-Wunsch? Einfach Bescheid geben.
+
+
+
+## Dependencies / 依赖库 / Abhängigkeiten
+- Python 3.x
+- PySide6
+- pypdf
