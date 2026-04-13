@@ -16,7 +16,6 @@ def _base_quadrants(margin_mm: float) -> tuple[fitz.Rect, fitz.Rect, fitz.Rect, 
     左上、右上、左下、右下
     """
     m = mm_to_pt(margin_mm)
-
     mid_x = A4_W / 2
     mid_y = A4_H / 2
 
@@ -40,7 +39,6 @@ def get_slots_for_preset(preset: str, margin_mm: float, _gap_mm_unused: float = 
         几何位置仍是 2x2，但逻辑上按“左半/右半”分组。
         为了实现“左侧书脊”，每一列内部再做一次上下交换：
         顺序：左下、左上、右下、右上
-
         这样相当于把横版结果页的上下两侧全部交换。
     """
     lt, rt, lb, rb = _base_quadrants(margin_mm)
@@ -56,41 +54,49 @@ def get_slots_for_preset(preset: str, margin_mm: float, _gap_mm_unused: float = 
     raise ValueError(f"Unsupported preset: {preset}")
 
 
-def _draw_dashed_line(page, p1, p2, line_width: float = 0.5):
+def _draw_guide_line(page, p1, p2, line_width: float = 0.5) -> None:
+    """
+    画辅助线。
+
+    这里故意不用 dashes 参数。
+    原因是当前项目生成的某些 PDF 在浏览器查看器（尤其 Edge）里
+    可能因为虚线内容流兼容性问题而显示为空白。
+
+    先统一改成实线，优先保证 PDF 输出的兼容性和可见性。
+    """
     page.draw_line(
         p1,
         p2,
         color=(0, 0, 0),
         width=line_width,
-        dashes=[3, 3],
     )
 
 
-def draw_guides(page, preset: str, line_width: float = 0.5):
+def draw_guides(page, preset: str, line_width: float = 0.5) -> None:
     """
     画辅助线。
 
     vertical:
-    - 一条整页竖线
-    - 一条整页横线
+        - 一条整页竖线
+        - 一条整页横线
 
     horizontal:
-    - 一条整页竖线（主裁切线）
-    - 左半页内部一条横线
-    - 右半页内部一条横线
+        - 一条整页竖线（主裁切线）
+        - 左半页内部一条横线
+        - 右半页内部一条横线
     """
     mid_x = A4_W / 2
     mid_y = A4_H / 2
 
     if preset == "vertical":
-        _draw_dashed_line(page, (mid_x, 0), (mid_x, A4_H), line_width)
-        _draw_dashed_line(page, (0, mid_y), (A4_W, mid_y), line_width)
+        _draw_guide_line(page, (mid_x, 0), (mid_x, A4_H), line_width)
+        _draw_guide_line(page, (0, mid_y), (A4_W, mid_y), line_width)
         return
 
     if preset == "horizontal":
-        _draw_dashed_line(page, (mid_x, 0), (mid_x, A4_H), line_width)
-        _draw_dashed_line(page, (0, mid_y), (mid_x, mid_y), line_width)
-        _draw_dashed_line(page, (mid_x, mid_y), (A4_W, mid_y), line_width)
+        _draw_guide_line(page, (mid_x, 0), (mid_x, A4_H), line_width)
+        _draw_guide_line(page, (0, mid_y), (mid_x, mid_y), line_width)
+        _draw_guide_line(page, (mid_x, mid_y), (A4_W, mid_y), line_width)
         return
 
     raise ValueError(f"Unsupported preset: {preset}")

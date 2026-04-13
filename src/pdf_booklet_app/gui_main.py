@@ -66,7 +66,7 @@ class MainWindow(QMainWindow):
                     "missing_output_title": "Missing Output",
                     "missing_output_text": "Please select an output PDF.",
                     "success_title": "Success",
-                    "success_text": "PDF generated:\n{output_pdf}\n\n{print_tip}",
+                    "success_text": "PDF generated:<br>{output_pdf}<br><br>{print_tip}",
                     "error_title": "Error",
                 },
                 "logs": {
@@ -77,15 +77,25 @@ class MainWindow(QMainWindow):
                     "rotation": "Rotation: {rotation_label}",
                     "order_mode": "Order mode: {order_mode}",
                     "done": "Done.",
-                    "print_tip": "Printing tip: {print_tip}",
+                    "print_tip": "Printing tip:<br>{print_tip}",
                     "error": "Error: {error}",
                 },
                 "tooltips": {
                     "experimental": "Experimental feature, not recommended to change.",
                 },
                 "print_tips": {
-                    "vertical": "Please print in duplex mode with long-edge flipping.",
-                    "horizontal": "Please print in duplex mode with short-edge flipping.",
+                    "vertical": (
+                        "1. Please print in duplex mode with <b>long-edge flip</b>.<br>"
+                        "2. Cut along the <b>shorter center line</b>.<br>"
+                        "3. Stack the upper half onto the lower half.<br>"
+                        "4. Fold."
+                    ),
+                    "horizontal": (
+                        "1. Please print in duplex mode with <b>short-edge flip</b>.<br>"
+                        "2. Cut along the <b>longer center line</b>.<br>"
+                        "3. Stack the upper half onto the lower half.<br>"
+                        "4. Fold."
+                    ),
                 },
                 "preset_items": [
                     ("Vertical PDF", PresetMode.VERTICAL.value),
@@ -122,7 +132,7 @@ class MainWindow(QMainWindow):
                     "missing_output_title": "缺少输出文件",
                     "missing_output_text": "请选择输出 PDF。",
                     "success_title": "成功",
-                    "success_text": "PDF 已生成：\n{output_pdf}\n\n{print_tip}",
+                    "success_text": "PDF 已生成：<br>{output_pdf}<br><br>{print_tip}",
                     "error_title": "错误",
                 },
                 "logs": {
@@ -133,15 +143,25 @@ class MainWindow(QMainWindow):
                     "rotation": "旋转：{rotation_label}",
                     "order_mode": "排序模式：{order_mode}",
                     "done": "完成。",
-                    "print_tip": "打印提示：{print_tip}",
+                    "print_tip": "打印提示：<br>{print_tip}",
                     "error": "错误：{error}",
                 },
                 "tooltips": {
                     "experimental": "实验功能，不建议修改。",
                 },
                 "print_tips": {
-                    "vertical": "请使用双页打印长边反转进行打印。",
-                    "horizontal": "请使用双页打印短边反转进行打印。",
+                    "vertical": (
+                        "1. 请使用双页打印 <b>长边翻转</b> 进行打印<br>"
+                        "2. 沿 <b>较短中线</b> 裁开<br>"
+                        "3. 上下叠放<br>"
+                        "4. 折叠"
+                    ),
+                    "horizontal": (
+                        "1. 请使用双页打印 <b>短边翻转</b> 进行打印<br>"
+                        "2. 沿 <b>较长中线</b> 裁开<br>"
+                        "3. 上下叠放<br>"
+                        "4. 折叠"
+                    ),
                 },
                 "preset_items": [
                     ("竖版 PDF", PresetMode.VERTICAL.value),
@@ -178,7 +198,7 @@ class MainWindow(QMainWindow):
                     "missing_output_title": "Ausgabe fehlt",
                     "missing_output_text": "Bitte wählen Sie eine Ausgabe-PDF aus.",
                     "success_title": "Erfolg",
-                    "success_text": "PDF erzeugt:\n{output_pdf}\n\n{print_tip}",
+                    "success_text": "PDF erzeugt:<br>{output_pdf}<br><br>{print_tip}",
                     "error_title": "Fehler",
                 },
                 "logs": {
@@ -189,15 +209,25 @@ class MainWindow(QMainWindow):
                     "rotation": "Drehung: {rotation_label}",
                     "order_mode": "Reihenfolge: {order_mode}",
                     "done": "Fertig.",
-                    "print_tip": "Druckhinweis: {print_tip}",
+                    "print_tip": "Druckhinweis:<br>{print_tip}",
                     "error": "Fehler: {error}",
                 },
                 "tooltips": {
                     "experimental": "Experimentelle Funktion, Änderung wird nicht empfohlen.",
                 },
                 "print_tips": {
-                    "vertical": "Bitte duplex mit Bindung an der langen Kante drucken.",
-                    "horizontal": "Bitte duplex mit Bindung an der kurzen Kante drucken.",
+                    "vertical": (
+                        "1. Bitte im Duplexmodus mit <b>Wenden an der langen Kante</b> drucken.<br>"
+                        "2. Entlang der <b>kürzeren Mittellinie</b> schneiden.<br>"
+                        "3. Die obere Hälfte auf die untere Hälfte stapeln.<br>"
+                        "4. Falten."
+                    ),
+                    "horizontal": (
+                        "1. Bitte im Duplexmodus mit <b>Wenden an der kurzen Kante</b> drucken.<br>"
+                        "2. Entlang der <b>längeren Mittellinie</b> schneiden.<br>"
+                        "3. Die obere Hälfte auf die untere Hälfte stapeln.<br>"
+                        "4. Falten."
+                    ),
                 },
                 "preset_items": [
                     ("Hochformat-PDF", PresetMode.VERTICAL.value),
@@ -368,11 +398,16 @@ class MainWindow(QMainWindow):
             self.ui.checkBackRotate180.setChecked(False)
 
         elif preset == PresetMode.HORIZONTAL:
-            self._set_rotate_value(0)
+            self._set_rotate_value(90)
             self.ui.checkBackRotate180.setChecked(False)
 
     def _log(self, text: str) -> None:
-        self.ui.plainTextLog.appendPlainText(text)
+        plain_text = (
+            text.replace("<br>", "\n")
+            .replace("<b>", "")
+            .replace("</b>", "")
+        )
+        self.ui.plainTextLog.appendPlainText(plain_text)
 
     def _generate_pdf(self) -> None:
         dialogs = self._lang()["dialogs"]
